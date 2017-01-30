@@ -1,0 +1,238 @@
+﻿@model List<ProjectInformationManagementSystem.Models.library_prep>
+
+@{
+    ViewBag.Title = "LibraryPrepData";
+}
+
+<h2 style="font-family:'Arial Rounded MT'; font:100; text-align:center">Enter Library Prep Data</h2>
+<br />
+@if (TempData["Error"] != null)
+{
+    @TempData["Error"]
+    <div class="col-md-6" style="color:red">
+        * All fields are required! <br />
+        * All fields must have correct data types!
+    </div>
+}
+
+@{
+    ProjectInformationManagementSystem.Models.sample_detail[] samplesArray = (ProjectInformationManagementSystem.Models.sample_detail[])TempData["samples"];
+    var user = @Session["fullName"];
+}
+
+@if (samplesArray != null)
+{
+
+
+    using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+        <div class="col-md-6" style="color:red">
+            * All fields are required! <br />
+            * All fields must have correct data types!
+        </div>
+
+
+        <table class="table-bordered libraryPrep" style="border: 0.5px solid #000000;overflow:scroll;width: auto !important;">
+            <tr style="color:white; background-color:black; font-family:'Open Sans'; font:100;">
+                <th> Project ID</th>
+                <th> GCL ID</th>
+                <th> Sample ID</th>                                                       
+                <th> Adapter ID</th>
+                <th> Adapter Sequence</th>
+                <th> Input Amount (ng)</th>
+                <th> Avg. Size (bp)</th>
+                <th> Concentration (ng/μl)</th>
+                <th> nM Concentration</th>
+                <th> Total Volume (μl)</th>
+                <th> Total Amount (ng)</th>
+                <th> Total nMoles</th>
+                <th> Date made</th>
+                <th> Made By</th>
+                <th> QC status</th>
+            </tr>
+
+        @for (int i = 0; i < ViewBag.totalCount; i++)
+        { 
+             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <tr class="tableRow">
+            
+                <td>
+                    @Html.EditorFor(model => model[i].project_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].project_id } })
+                    @Html.ValidationMessageFor(model => model[i].project_id, "", new { @class = "text-danger" })
+                </td>
+            
+                <td>
+                    @Html.EditorFor(model => model[i].gcl_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].gcl_id } })
+                    @Html.ValidationMessageFor(model => model[i].gcl_id, "", new { @class = "text-danger" })
+                </td>
+           
+                <td>
+                    @Html.EditorFor(model => model[i].sample_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].sample_id } })
+                    @Html.ValidationMessageFor(model => model[i].sample_id, "", new { @class = "text-danger" })
+                </td>
+           
+                <td>
+                   @Html.DropDownListFor(model => model[i].qc_status, new List<SelectListItem>
+                       {
+                         new SelectListItem { Text="Select", Value="", Selected=true},
+                          new SelectListItem { Text="TS1", Value="TS1"},
+                           new SelectListItem { Text="TS2", Value="TS2" },
+                           new SelectListItem {Text="TS3", Value="TS3" },
+                            new SelectListItem {Text="TS4", Value="TS4" },
+                             new SelectListItem {Text="TS5", Value="TS5" },
+                              new SelectListItem {Text="TS6", Value="TS6" },
+                               new SelectListItem {Text="TS7", Value="TS7" },
+                                new SelectListItem {Text="TS8", Value="TS8" }
+                       }, new { @class = "btn btn-default dropdown-toggle adapterID" })
+                    @Html.ValidationMessageFor(model => model[i].adapter_id, "", new { @class = "text-danger", @type="text" })
+                </td>
+           
+                <td>
+                    @Html.EditorFor(model => model[i].adapter_sequence, new { htmlAttributes = new { @class = "form-control input-validation-error adatperSequence", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].adapter_sequence, "", new { @class = "text-danger" })
+                </td>
+                 <td>
+                    @Html.EditorFor(model => model[i].input_amount, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].input_amount, "", new { @class = "text-danger" })
+                </td>
+           
+                <td>
+                    @Html.EditorFor(model => model[i].average_size, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].average_size, "", new { @class = "text-danger" })
+                </td>
+            
+                <td id="ngConc">
+                    @Html.EditorFor(model => model[i].library_concentration, new { htmlAttributes = new { @class = "form-control input-validation-error ngConc", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].library_concentration, "", new { @class = "text-danger" })
+                </td>
+            
+                <td id="nmConc">
+                    @Html.EditorFor(model => model[i].nm_concentration, new { htmlAttributes = new { @class = "form-control input-validation-error nmConc", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].nm_concentration, "", new { @class = "text-danger" })
+                </td>
+           
+                <td id="volume">
+                    @Html.EditorFor(model => model[i].total_volume, new { htmlAttributes = new { @class = "form-control input-validation-error totalVolume", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].total_volume, "", new { @class = "text-danger" })
+                </td>
+           
+                <td id="totalNg">
+                    @Html.EditorFor(model => model[i].total_amount, new { htmlAttributes = new { @class = "form-control input-validation-error totalAmount", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].total_amount, "", new { @class = "text-danger" })
+                </td>
+            
+                <td id="totalNmoles">
+                    @Html.EditorFor(model => model[i].total_nmoles, new { htmlAttributes = new { @class = "form-control input-validation-error totalNmoles", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model[i].total_nmoles, "", new { @class = "text-danger" })
+                </td>
+            
+                <td>
+                    @Html.EditorFor(model => model[i].date_made, new { htmlAttributes = new { @class ="form-control", @Value =DateTime.Now.Date.ToString("MM/dd/yyyy") } })
+                    @Html.ValidationMessageFor(model => model[i].date_made, "", new { @class = "text-danger" })
+                </td>
+            
+                <td>
+                    @Html.EditorFor(model => model[i].made_by, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text", @Value= user } })
+                    @Html.ValidationMessageFor(model => model[i].made_by, "", new { @class = "text-danger" })
+                </td>
+           
+                <td>
+                    @Html.DropDownListFor(model => model[i].qc_status, new List<SelectListItem>
+                       {
+                          new SelectListItem { Text="Complete", Value="Complete", Selected=true},
+                           new SelectListItem { Text="Failed", Value="Failed" },
+                           new SelectListItem { Text="Reprocess", Value="Reprocess" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model[i].qc_status, "", new { @class = "text-danger" })
+                </td>
+            
+    </tr>
+        }
+  </table>
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-6">
+            <input type="submit" value="Submit Data" class="btn btn-primary" />
+        </div>
+    </div>
+
+
+    }
+
+}
+
+else
+{
+    <h2> Error: No samples were found for this project.</h2><br />
+
+    <input type="submit" value="Go To Work Queue" class="btn btn-primary" onclick="location.href='@Url.Action("Summary", "Data")'" />
+}
+
+<script>
+$(document).ready(function () {
+       $('.tableRow .totalVolume').keyup(multInputs);
+
+       function multInputs() {
+
+           // for each row:
+           $("tr.tableRow").each(function () {
+               // get the values from this row:
+               var $ngConc = $('.ngConc', this).val();
+               var $nmConc=$('.nmConc', this).val();
+               var $vol = $('.totalVolume', this).val();
+               var $totalNg = ($ngConc * 1) * ($vol * 1); 
+               var $totalNm = ($nmConc * 1) * ($vol * 1);
+               // set total for the row
+               $('.totalAmount', this).val($totalNg.toFixed(2));
+               $('.totalNmoles', this).val($totalNm.toFixed(2));
+
+           });
+       }
+  });
+
+</script>
+
+<script>
+$(document).ready(function () {
+       $('.tableRow .adapterID').change(bcSequence);
+
+       function bcSequence() {
+
+           // for each row:
+           $("tr.tableRow").each(function () {
+               // get the values from this row:
+               var $adapterID = $('.adapterID', this).val();
+               
+
+               if ($adapterID == "TS1") {
+                   $('.adatperSequence', this).val("ATCACG");
+               }
+               if ($adapterID == "TS2") {
+                   $('.adatperSequence', this).val("CGATGT");
+               }
+               if ($adapterID == "TS3") {
+                   $('.adatperSequence', this).val("TTAGGC");
+               }
+               if ($adapterID == "TS4") {
+                   $('.adatperSequence', this).val("TGACCA");
+               }
+               if ($adapterID == "TS5") {
+                   $('.adatperSequence', this).val("ACAGTG");
+               }
+               if ($adapterID == "TS6") {
+                   $('.adatperSequence', this).val("GCCAAT");
+               }
+               if ($adapterID == "TS7") {
+                   $('.adatperSequence', this).val("CAGATC");
+               }
+               if ($adapterID == "T8") {
+                   $('.adatperSequence', this).val("ACTTGA");
+               }
+           });
+       }
+  });
+
+</script>

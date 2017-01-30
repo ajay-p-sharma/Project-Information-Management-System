@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pimsModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="capture_data">
+          <Key>
+            <PropertyRef Name="captureRecordId" />
+          </Key>
+          <Property Name="captureRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gcl_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="sample_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="capture_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="input_amount" Type="double" Nullable="false" />
+          <Property Name="concentration" Type="double" Nullable="false" />
+          <Property Name="nm_concentration" Type="double" Nullable="false" />
+          <Property Name="total_volume" Type="double" Nullable="false" />
+          <Property Name="total_amount" Type="double" Nullable="false" />
+          <Property Name="date_made" Type="date" Nullable="false" />
+          <Property Name="made_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="qc_status" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="extraction_data">
+          <Key>
+            <PropertyRef Name="extractionRecordId" />
+          </Key>
+          <Property Name="extractionRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="gcl_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="nucleic_acid_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="concentration" Type="double" Nullable="false" />
+          <Property Name="total_volume" Type="double" Nullable="false" />
+          <Property Name="total_amount" Type="double" Nullable="false" />
+          <Property Name="extraction_date" Type="date" Nullable="false" />
+          <Property Name="extracted_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="qc_status" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="incoming_project">
+          <Key>
+            <PropertyRef Name="temp_project_id" />
+          </Key>
+          <Property Name="temp_project_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_name" Type="varchar" MaxLength="45" />
+          <Property Name="lab_head" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="email_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_phone" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="sample_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="number_of_samples" Type="int" Nullable="false" />
+          <Property Name="samples_with_core" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="species" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="service_requested" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="downstream_process" Type="varchar" MaxLength="45" />
+          <Property Name="date_submitted" Type="date" Nullable="false" />
+          <Property Name="comments" Type="longtext" />
+        </EntityType>
+        <EntityType Name="library_prep">
+          <Key>
+            <PropertyRef Name="libRecordId" />
+          </Key>
+          <Property Name="libRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="gcl_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="adapter_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="adapter_sequence" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="input_amount" Type="double" Nullable="false" />
+          <Property Name="average_size" Type="double" Nullable="false" />
+          <Property Name="library_concentration" Type="double" Nullable="false" />
+          <Property Name="nm_concentration" Type="double" Nullable="false" />
+          <Property Name="total_volume" Type="double" Nullable="false" />
+          <Property Name="total_amount" Type="double" Nullable="false" />
+          <Property Name="total_nmoles" Type="double" Nullable="false" />
+          <Property Name="date_made" Type="date" Nullable="false" />
+          <Property Name="made_by" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="qc_status" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="new_project">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_name" Type="varchar" MaxLength="100" />
+          <Property Name="investigator_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="lab_head" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="contact_phone" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="service_requested" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_type" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="species" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="number_of_samples" Type="int" Nullable="false" />
+          <Property Name="date_submitted" Type="date" Nullable="false" />
+          <Property Name="date_samples_submitted" Type="date" Nullable="false" />
+          <Property Name="current_status" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="date_completed" Type="date" />
+          <Property Name="downstream_process" Type="varchar" MaxLength="45" />
+          <Property Name="service_cost" Type="double" Nullable="false" />
+          <Property Name="comments" Type="longtext" />
+        </EntityType>
+        <EntityType Name="sample_detail">
+          <Key>
+            <PropertyRef Name="sampleRecordId" />
+          </Key>
+          <Property Name="sampleRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="gcl_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_id" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sequencing_data">
+          <Key>
+            <PropertyRef Name="seqRecordId" />
+          </Key>
+          <Property Name="seqRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="gcl_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="sample_id" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="total_reads" Type="int" Nullable="false" />
+          <Property Name="unmapped_reads" Type="int" Nullable="false" />
+          <Property Name="qc_status" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="data_delivered" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="date_delivered" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="pi_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="department" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fund_number" Type="int" Nullable="false" />
+          <Property Name="cost_center" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="user_type" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="pimsModelStoreContainer">
+          <EntitySet Name="capture_data" EntityType="Self.capture_data" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="extraction_data" EntityType="Self.extraction_data" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="incoming_project" EntityType="Self.incoming_project" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="library_prep" EntityType="Self.library_prep" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="new_project" EntityType="Self.new_project" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="sample_detail" EntityType="Self.sample_detail" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="sequencing_data" EntityType="Self.sequencing_data" Schema="pims" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="pims" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pimsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="capture_data">
+          <Key>
+            <PropertyRef Name="captureRecordId" />
+          </Key>
+          <Property Name="captureRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gcl_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="sample_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="capture_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="input_amount" Type="Double" Nullable="false" />
+          <Property Name="concentration" Type="Double" Nullable="false" />
+          <Property Name="nm_concentration" Type="Double" Nullable="false" />
+          <Property Name="total_volume" Type="Double" Nullable="false" />
+          <Property Name="total_amount" Type="Double" Nullable="false" />
+          <Property Name="date_made" Type="DateTime" Nullable="false" />
+          <Property Name="made_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qc_status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="extraction_data">
+          <Key>
+            <PropertyRef Name="extractionRecordId" />
+          </Key>
+          <Property Name="extractionRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="gcl_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nucleic_acid_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="concentration" Type="Double" Nullable="false" />
+          <Property Name="total_volume" Type="Double" Nullable="false" />
+          <Property Name="total_amount" Type="Double" Nullable="false" />
+          <Property Name="extraction_date" Type="DateTime" Nullable="false" />
+          <Property Name="extracted_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qc_status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="incoming_project">
+          <Key>
+            <PropertyRef Name="temp_project_id" />
+          </Key>
+          <Property Name="temp_project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lab_head" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number_of_samples" Type="Int32" Nullable="false" />
+          <Property Name="samples_with_core" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="species" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_requested" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="downstream_process" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="library_prep">
+          <Key>
+            <PropertyRef Name="libRecordId" />
+          </Key>
+          <Property Name="libRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="gcl_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adapter_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adapter_sequence" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="input_amount" Type="Double" Nullable="false" />
+          <Property Name="average_size" Type="Double" Nullable="false" />
+          <Property Name="library_concentration" Type="Double" Nullable="false" />
+          <Property Name="nm_concentration" Type="Double" Nullable="false" />
+          <Property Name="total_volume" Type="Double" Nullable="false" />
+          <Property Name="total_amount" Type="Double" Nullable="false" />
+          <Property Name="total_nmoles" Type="Double" Nullable="false" />
+          <Property Name="date_made" Type="DateTime" Nullable="false" />
+          <Property Name="made_by" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qc_status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="new_project">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="investigator_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lab_head" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_requested" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="species" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number_of_samples" Type="Int32" Nullable="false" />
+          <Property Name="date_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="date_samples_submitted" Type="DateTime" Nullable="false" />
+          <Property Name="current_status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_completed" Type="DateTime" />
+          <Property Name="downstream_process" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="service_cost" Type="Double" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sample_detail">
+          <Key>
+            <PropertyRef Name="sampleRecordId" />
+          </Key>
+          <Property Name="sampleRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="gcl_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sequencing_data">
+          <Key>
+            <PropertyRef Name="seqRecordId" />
+          </Key>
+          <Property Name="seqRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="gcl_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sample_id" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total_reads" Type="Int32" Nullable="false" />
+          <Property Name="unmapped_reads" Type="Int32" Nullable="false" />
+          <Property Name="qc_status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data_delivered" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_delivered" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pi_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="department" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fund_number" Type="Int32" Nullable="false" />
+          <Property Name="cost_center" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="pimsEntitiesNew" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="capture_data" EntityType="Self.capture_data" />
+          <EntitySet Name="extraction_data" EntityType="Self.extraction_data" />
+          <EntitySet Name="incoming_project" EntityType="Self.incoming_project" />
+          <EntitySet Name="library_prep" EntityType="Self.library_prep" />
+          <EntitySet Name="new_project" EntityType="Self.new_project" />
+          <EntitySet Name="sample_detail" EntityType="Self.sample_detail" />
+          <EntitySet Name="sequencing_data" EntityType="Self.sequencing_data" />
+          <EntitySet Name="users" EntityType="Self.user" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pimsModelStoreContainer" CdmEntityContainer="pimsEntitiesNew">
+          <EntitySetMapping Name="capture_data">
+            <EntityTypeMapping TypeName="pimsModel.capture_data">
+              <MappingFragment StoreEntitySet="capture_data">
+                <ScalarProperty Name="captureRecordId" ColumnName="captureRecordId" />
+                <ScalarProperty Name="gcl_id" ColumnName="gcl_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="capture_type" ColumnName="capture_type" />
+                <ScalarProperty Name="input_amount" ColumnName="input_amount" />
+                <ScalarProperty Name="concentration" ColumnName="concentration" />
+                <ScalarProperty Name="nm_concentration" ColumnName="nm_concentration" />
+                <ScalarProperty Name="total_volume" ColumnName="total_volume" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="date_made" ColumnName="date_made" />
+                <ScalarProperty Name="made_by" ColumnName="made_by" />
+                <ScalarProperty Name="qc_status" ColumnName="qc_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="extraction_data">
+            <EntityTypeMapping TypeName="pimsModel.extraction_data">
+              <MappingFragment StoreEntitySet="extraction_data">
+                <ScalarProperty Name="extractionRecordId" ColumnName="extractionRecordId" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="gcl_id" ColumnName="gcl_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="sample_type" ColumnName="sample_type" />
+                <ScalarProperty Name="nucleic_acid_type" ColumnName="nucleic_acid_type" />
+                <ScalarProperty Name="concentration" ColumnName="concentration" />
+                <ScalarProperty Name="total_volume" ColumnName="total_volume" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="extraction_date" ColumnName="extraction_date" />
+                <ScalarProperty Name="extracted_by" ColumnName="extracted_by" />
+                <ScalarProperty Name="qc_status" ColumnName="qc_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incoming_project">
+            <EntityTypeMapping TypeName="pimsModel.incoming_project">
+              <MappingFragment StoreEntitySet="incoming_project">
+                <ScalarProperty Name="temp_project_id" ColumnName="temp_project_id" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="lab_head" ColumnName="lab_head" />
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+                <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+                <ScalarProperty Name="sample_type" ColumnName="sample_type" />
+                <ScalarProperty Name="number_of_samples" ColumnName="number_of_samples" />
+                <ScalarProperty Name="samples_with_core" ColumnName="samples_with_core" />
+                <ScalarProperty Name="species" ColumnName="species" />
+                <ScalarProperty Name="service_requested" ColumnName="service_requested" />
+                <ScalarProperty Name="downstream_process" ColumnName="downstream_process" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="library_prep">
+            <EntityTypeMapping TypeName="pimsModel.library_prep">
+              <MappingFragment StoreEntitySet="library_prep">
+                <ScalarProperty Name="libRecordId" ColumnName="libRecordId" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="gcl_id" ColumnName="gcl_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="adapter_id" ColumnName="adapter_id" />
+                <ScalarProperty Name="adapter_sequence" ColumnName="adapter_sequence" />
+                <ScalarProperty Name="input_amount" ColumnName="input_amount" />
+                <ScalarProperty Name="average_size" ColumnName="average_size" />
+                <ScalarProperty Name="library_concentration" ColumnName="library_concentration" />
+                <ScalarProperty Name="nm_concentration" ColumnName="nm_concentration" />
+                <ScalarProperty Name="total_volume" ColumnName="total_volume" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="total_nmoles" ColumnName="total_nmoles" />
+                <ScalarProperty Name="date_made" ColumnName="date_made" />
+                <ScalarProperty Name="made_by" ColumnName="made_by" />
+                <ScalarProperty Name="qc_status" ColumnName="qc_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="new_project">
+            <EntityTypeMapping TypeName="pimsModel.new_project">
+              <MappingFragment StoreEntitySet="new_project">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="investigator_name" ColumnName="investigator_name" />
+                <ScalarProperty Name="lab_head" ColumnName="lab_head" />
+                <ScalarProperty Name="contact_name" ColumnName="contact_name" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+                <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+                <ScalarProperty Name="service_requested" ColumnName="service_requested" />
+                <ScalarProperty Name="sample_type" ColumnName="sample_type" />
+                <ScalarProperty Name="species" ColumnName="species" />
+                <ScalarProperty Name="number_of_samples" ColumnName="number_of_samples" />
+                <ScalarProperty Name="date_submitted" ColumnName="date_submitted" />
+                <ScalarProperty Name="date_samples_submitted" ColumnName="date_samples_submitted" />
+                <ScalarProperty Name="current_status" ColumnName="current_status" />
+                <ScalarProperty Name="date_completed" ColumnName="date_completed" />
+                <ScalarProperty Name="downstream_process" ColumnName="downstream_process" />
+                <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sample_detail">
+            <EntityTypeMapping TypeName="pimsModel.sample_detail">
+              <MappingFragment StoreEntitySet="sample_detail">
+                <ScalarProperty Name="sampleRecordId" ColumnName="sampleRecordId" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="gcl_id" ColumnName="gcl_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sequencing_data">
+            <EntityTypeMapping TypeName="pimsModel.sequencing_data">
+              <MappingFragment StoreEntitySet="sequencing_data">
+                <ScalarProperty Name="seqRecordId" ColumnName="seqRecordId" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="gcl_id" ColumnName="gcl_id" />
+                <ScalarProperty Name="sample_id" ColumnName="sample_id" />
+                <ScalarProperty Name="total_reads" ColumnName="total_reads" />
+                <ScalarProperty Name="unmapped_reads" ColumnName="unmapped_reads" />
+                <ScalarProperty Name="qc_status" ColumnName="qc_status" />
+                <ScalarProperty Name="data_delivered" ColumnName="data_delivered" />
+                <ScalarProperty Name="date_delivered" ColumnName="date_delivered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="pimsModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pi_name" ColumnName="pi_name" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="fund_number" ColumnName="fund_number" />
+                <ScalarProperty Name="cost_center" ColumnName="cost_center" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

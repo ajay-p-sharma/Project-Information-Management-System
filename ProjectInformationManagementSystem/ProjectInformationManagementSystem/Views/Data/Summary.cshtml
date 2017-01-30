@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Summary";
+}
+
+<h2 style="text-align:center"> Samples</h2><br />
+
+
+
+@foreach(var i in ViewBag.Counts)
+{
+    
+   <div class="form-wrapper projectQueueDiv" style="margin-bottom:5px;">
+           <div class="col-md-5" style="max-width:40%;" >
+               <b>Project: @i.projectNum</b>
+           </div>
+       
+           <div class="col-md-5" style="max-width:40%;">
+               <b>Samples: @i.numberOfSamples</b>
+           
+           </div>
+
+           <div class="col-md-4" style="max-width:20%;">
+              
+               <b> @Html.ActionLink("Add Data", "AddData", new {  id = i.projectNum }, new { @style = "color:black;" })</b>
+          </div>
+
+       </div>
+}
+

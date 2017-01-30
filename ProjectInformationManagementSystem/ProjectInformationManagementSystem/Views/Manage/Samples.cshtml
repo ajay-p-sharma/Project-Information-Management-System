@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Samples";
+}
+
+<h2 style="font-family:'Arial Rounded MT'; font:120;">Samples</h2><br />
+
+@using (Ajax.BeginForm("showSamples", "Manage", new AjaxOptions {HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }))
+{
+    <div class="form-inline row">
+        <div class="form-group">
+            <label class="control-label" for="startDate">Project ID</label>
+            <input type="text" class="form-control" id="enterProjectId" placeholder="Enter Project ID" name="searchProjectId" required="required">
+            
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-bottom:10px; margin-top:20px;">Find Samples</button>
+
+}
+
+
+<div id="resultArea" style="width:80%; margin:auto;">
+</div>
+

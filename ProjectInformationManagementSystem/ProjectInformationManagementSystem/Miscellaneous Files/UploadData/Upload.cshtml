@@ -1,0 +1,46 @@
+﻿@model IList<ProjectInformationManagementSystem.Models.sample_detail>
+@{
+    ViewBag.Title = "Insert Bulk Data";
+}
+
+<div style="width:700px; padding:5px; background-color:white;">
+    @using (Html.BeginForm("BulkData", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div><a href="#" id="addNew">Add New</a></div>
+        <table id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Project ID</th>
+                <th>GCL ID</th>
+                <th>Sample ID</th>
+                <th></th>
+            </tr>
+           
+                
+                @for (int j=0; j<1; j++)
+                {
+                    <tr style="border:1px solid black">
+                        <td>@Html.TextBoxFor(a => a[j].project_id)</td>
+                        <td>@Html.TextBoxFor(a => a[j].gcl_id)</td>
+                        <td>@Html.TextBoxFor(a => a[j].sample_id)</td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                   
+                }
+            
+        </table>
+        <input type="submit" value="Save Bulk Data" />
+    }
+</div>
+

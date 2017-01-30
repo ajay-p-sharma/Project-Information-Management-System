@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Project Management";
+}
+
+<div class="row">
+
+    <div class="col-md-3 sidemenu-wrapper">
+        <h3 style="">Management Menu</h3>  
+        <ul class="list-group sidemenu-items">
+            
+            <li class="list-group-item">
+                <a href="#">Incoming Projects</a>
+            </li>
+            <li class="list-group-item" id="newProjectLink">
+                <a href="@Url.Action("AddNewProject", "Manage")">New Project</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Project Queue</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Project Tracker</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">Reports</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#">User Management</a>
+            </li>
+            
+        </ul>
+
+    
+    
+    </div>
+    <div class="col-md-9 maincontent-wrapper" id="content-div">
+
+    </div>
+    
+</div>
+

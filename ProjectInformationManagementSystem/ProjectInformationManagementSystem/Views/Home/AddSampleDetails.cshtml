@@ -1,0 +1,109 @@
+﻿@model List<ProjectInformationManagementSystem.Models.sample_detail>
+
+
+
+@*
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+*@
+<script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+
+            //1. Add new row
+            $("#addNew").click(function(e) {
+                e.preventDefault();
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
+
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+               $trNew.find("td:last").html('<a href="#" class="remove"></a>');
+                $.each($trNew.find(':input'), function (i, val){
+                    // Replaced Name
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    $(this).attr('name', newN);
+                    //Replaced value
+                    var type = $(this).attr('type');
+                    if (type.toLowerCase() == "text") {
+                        $(this).attr('value', '');
+                    }
+
+                    // If you have another Type then replace with default value
+                    $(this).removeClass("input-validation-error");
+
+                });
+                $trLast.after($trNew);
+
+                // Re-assign Validation
+                var form = $("form")
+                    .removeData("validator")
+                    .removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
+            });
+
+            // 2. Remove
+            $('a.remove').live("click", function (e) {
+                e.preventDefault();
+                $(this).parent().parent().remove();
+            });
+
+        });
+</script>
+
+
+
+
+
+<h2 style="text-align:center; ">Add sample information</h2>
+
+
+<div class="form-wrapper" style="width:700px; background-color:white;">
+    @if (ViewBag.Message != null || ViewBag.Error != null)
+    { <div class="alert alert-info">
+        @ViewBag.Message
+        @ViewBag.Error
+    </div>}
+    @using (Html.BeginForm("AddSampleDetails", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div><input type="button" class="btn btn-primary" value="Add Rows" id="addNew"></div>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Project ID</th>
+                <th>GCL ID</th>
+                <th>Sample ID</th>
+                <th></th>
+            </tr>
+
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr style="border:1px solid black">
+                        <td>@Html.TextBoxFor(a => a[j].project_id, new { @class = "form-control" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].gcl_id, new { @class = "form-control" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].sample_id, new { @class = "form-control" })</td>
+
+                        <td>
+
+                            @if (j > 0)
+                            {
+                                <a href="#" class="remove"></a>
+                            }
+                        </td>
+                    </tr>
+                }
+                j++;
+            }
+        </table>
+        <input type="submit" value="Save Bulk Data" />
+    }
+</div>
+
+

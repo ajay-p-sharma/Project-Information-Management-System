@@ -1,0 +1,121 @@
+﻿@model List<ProjectInformationManagementSystem.Models.sequencing_data>
+
+@{
+    ViewBag.Title = "SequencingData";
+}
+
+<h2 style="font-family:'Arial Rounded MT'; font:100; text-align:center">Enter Sequencing Data</h2>
+<br />
+@if (TempData["Error"] != null)
+{
+    @TempData["Error"]
+    <div class="col-md-6" style="color:red">
+        * All fields are required! <br />
+        * All fields must have correct data types!
+    </div>
+}
+@{
+    ProjectInformationManagementSystem.Models.sample_detail[] samplesArray = (ProjectInformationManagementSystem.Models.sample_detail[])TempData["samples"];
+    var user = @Session["fullName"];
+}
+
+
+@if (samplesArray != null)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-9" style="color:red">
+            * All fields are required! <br />
+            * All fields must have correct data types!
+        </div>
+
+        <table class="table-bordered" style="border: 0.5px solid #000000;overflow:scroll;width: auto !important;">
+            <tr style="color:white; background-color:black; font-family:'Open Sans'; font:100;">
+                <th> Project ID</th>
+                <th> GCL ID</th>
+                <th> Sample ID</th>
+                <th> Total Reads (Million)</th>
+                <th> Unmapped Reads (Million)</th>
+                <th> QC status</th>
+                <th> Data Delivered</th>
+                <th> Date Updated</th>
+            </tr>
+
+            @for (int i = 0; i < ViewBag.totalCount; i++)
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model[i].project_id, new { htmlAttributes = new { @class = "form-control" , @Value=samplesArray[i].project_id } })
+                        @Html.ValidationMessageFor(model => model[i].project_id, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model[i].gcl_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].gcl_id } })
+                        @Html.ValidationMessageFor(model => model[i].gcl_id, "", new { @class = "text-danger" })
+
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model[i].sample_id, new { htmlAttributes = new { @class = "form-control" , @Value=@samplesArray[i].sample_id } })
+                        @Html.ValidationMessageFor(model => model[i].sample_id, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model[i].total_reads, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model[i].total_reads, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model[i].unmapped_reads, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model[i].unmapped_reads, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.DropDownListFor(model => model[i].qc_status, new List<SelectListItem>
+                       {
+                          new SelectListItem { Text="Complete", Value="Complete", Selected=true},
+                           new SelectListItem { Text="Failed", Value="Failed" },
+                           new SelectListItem { Text="Reprocess", Value="Reprocess" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model[i].qc_status, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.DropDownListFor(model => model[i].data_delivered, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="Yes", Value="Yes", Selected=true},
+                           new SelectListItem { Text="No", Value="No" },
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model[i].data_delivered, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model[i].date_delivered, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy") } })
+                        @Html.ValidationMessageFor(model => model[i].date_delivered, "", new { @class = "text-danger" })
+                    </td>
+
+                </tr>
+
+
+
+            }
+        </table>
+        <br />
+        <div class="form-group">
+            <div class="col-md-6">
+                <input type="submit" value="Submit Data" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+}
+
+else
+{
+    <h2> Error: No samples were found for this project.</h2><br />
+
+    <input type="submit" value="Go To Work Queue" class="btn btn-primary" onclick="location.href='@Url.Action("Summary", "Data")'" />
+}

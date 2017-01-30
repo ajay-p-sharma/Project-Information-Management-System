@@ -1,0 +1,197 @@
+﻿@model ProjectInformationManagementSystem.Models.new_project
+
+@{
+    ViewBag.Title = "Edit Project";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-wrapper">
+        <div class="form-horizontal">
+            @ViewBag.Result
+            <h2 style="color: black; font-family: Trocchi, serif; font-size: 45px; font-weight: normal; line-height: 48px; margin-left:40px;">Edit Project</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.project_id)
+            @Html.HiddenFor(model => model.date_submitted)
+            @Html.HiddenFor(model => model.date_samples_submitted)
+           
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.project_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.project_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.project_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.investigator_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.investigator_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.investigator_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.lab_head, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.lab_head, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.lab_head, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contact_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.contact_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.contact_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contact_email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.contact_email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.contact_email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contact_phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.contact_phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.contact_phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.service_requested, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.service_requested, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="Select Service", Value="", Selected=true},
+                           new SelectListItem { Text="Extraction", Value="Extraction" },
+                           new SelectListItem { Text="Quality control", Value="Qality control" },
+                           new SelectListItem { Text="Library Preparation", Value="Library Preparation" },
+                           new SelectListItem { Text="Library Capture", Value="Library Capture" },
+                           new SelectListItem { Text="Sequencing", Value="Sequencing" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model.service_requested, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.sample_type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    
+                            @Html.DropDownListFor(model => model.sample_type, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="Tissue", Value="Tissue", Selected=true},
+                           new SelectListItem { Text="Cells", Value="Cells" },
+                           new SelectListItem { Text="Blood", Value="Blood" },
+                           new SelectListItem { Text="DNA", Value="DNA" },
+                           new SelectListItem { Text="RNA", Value="RNA" },
+                           new SelectListItem { Text="DNA Libraries", Value="DNA Libraries" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                        @Html.ValidationMessageFor(model => model.sample_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.species, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.species, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="Select Species", Value="", Selected=true},
+                           new SelectListItem { Text="Human", Value="Human" },
+                           new SelectListItem { Text="Mouse", Value="Mouse" },
+                           new SelectListItem { Text="Bacteria", Value="Bacteria" },
+                           new SelectListItem { Text="Drosophila", Value="Drosophila" },
+                           new SelectListItem { Text="Yeast", Value="Yeast" },
+                           new SelectListItem { Text="Chicken", Value="Chicken" },
+                           new SelectListItem { Text="Other", Value="Other" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })   
+                    @Html.ValidationMessageFor(model => model.species, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.number_of_samples, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.number_of_samples, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.number_of_samples, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.current_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.current_status, new List<SelectListItem>
+                   {
+                       new SelectListItem { Text="------", Value="", Selected=true},
+                       new SelectListItem { Text="Ready for processing", Value="Ready for processing" },
+                       new SelectListItem { Text="Processing", Value="Processing" },
+                       new SelectListItem { Text="Complete", Value="Complete" },
+                       new SelectListItem { Text="On Hold", Value="On Hold" }
+                   }, new { @class = "btn btn-default dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model.current_status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.date_completed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.date_completed, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.date_completed, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.downstream_process, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.downstream_process, new List<SelectListItem>
+           {
+               new SelectListItem { Text="Select Downstream Process", Value="", Selected=true},
+               new SelectListItem { Text="Extraction", Value="Extraction" },
+               new SelectListItem { Text="Quality control", Value="Qality control" },
+               new SelectListItem { Text="Library Preparation", Value="Library Preparation" },
+               new SelectListItem { Text="Library Capture", Value="Lobrary Capture" },
+               new SelectListItem { Text="Sequencing", Value="Sequencing" },
+
+           }, new { @class = "btn btn-default dropdown-toggle" })
+                    @Html.ValidationMessageFor(model => model.downstream_process, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.service_cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.service_cost, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.service_cost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.comments, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <input type="submit" value="Save" class="btn btn-primary" /> <input type="button" value="Cancel" class="btn btn-primary" onclick="location.href='@Url.Action("ProjectQueue", "Manage")'" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Tracker";
+}
+
+
+
+    @Ajax.ActionLink("Refresh TAT", "TurnAround", "Tracker", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "turnAroundTimes",
+    InsertionMode = InsertionMode.Replace
+}, (object)new { @class = "btn btn-primary", @style="margin-left:100px; margin-bottom:20px;" })
+
+<div class="row " id="turnAroundTimes" style="width:100%;margin:0 auto;">
+    @Html.Partial("_TurnAroundTimes")
+</div>
+
+
+
+@Ajax.ActionLink("Extraction Data", "extractionTrack", "Tracker", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "dataTracking",
+    InsertionMode = InsertionMode.Replace
+}, (object)new { @class = "btn btn-primary", @style = "margin-left:100px; margin-bottom:20px; margin-top:20px;" })
+
+@Ajax.ActionLink("Library Prep Data", "LibraryPrepTrack", "Tracker", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "dataTracking",
+    InsertionMode = InsertionMode.Replace
+}, (object)new { @class = "btn btn-primary", @style = "margin-left:100px; margin-bottom:20px; margin-top:20px;" })
+
+@Ajax.ActionLink("Capture Data", "captureTrack", "Tracker", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "dataTracking",
+    InsertionMode = InsertionMode.Replace
+}, (object)new { @class = "btn btn-primary", @style = "margin-left:100px; margin-bottom:20px; margin-top:20px;" })
+
+
+@Ajax.ActionLink("Sequencing Data", "sequencingTrack", "Tracker", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "dataTracking",
+    InsertionMode = InsertionMode.Replace
+}, (object)new { @class = "btn btn-primary", @style = "margin-left:100px; margin-bottom:20px; margin-top:20px;" })
+
+
+<div class="row trackingTable" id="dataTracking" style="width:95%; margin:0 auto; padding:10px; border-radius:5px;">
+   
+</div>
+

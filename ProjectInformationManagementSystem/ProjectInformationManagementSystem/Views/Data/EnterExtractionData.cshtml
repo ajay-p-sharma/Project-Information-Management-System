@@ -1,0 +1,172 @@
+﻿@model List<ProjectInformationManagementSystem.Models.extraction_data>
+
+
+@{
+    ViewBag.Title = "ExtractionData";
+}
+
+
+
+<h2 style="font-family:'Arial Rounded MT'; font:100; text-align:center">Enter Extraction Data</h2>
+<br />
+
+@if (TempData["Error"] != null)
+{    
+    @TempData["Error"]
+    <div class="col-md-6" style="color:red">
+        * All fields are required! <br />
+        * All fields must have correct data types!
+    </div>
+}
+
+@{
+    ProjectInformationManagementSystem.Models.sample_detail[] samplesArray = (ProjectInformationManagementSystem.Models.sample_detail[])TempData["samples"];
+    var user = @Session["fullName"];
+}
+
+
+@if (samplesArray != null)
+{
+    @Html.ValidationSummary(true, "", new { @class="text-danger"})
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="col-md-6" style="color:red">
+            * All fields are required! <br />
+            * All fields must have correct data types!
+        </div>
+
+      
+            <table class="table-bordered extractionData" id="extractionData" style="border: 0.5px solid #000000;overflow:scroll;width: auto !important;">
+                <thead>
+                    <tr style="color:white; background-color:black; font-family:'Open Sans'; font:100;">
+                        <th> Project ID</th>
+                        <th> GCL ID</th>
+                        <th> Sample ID</th>
+                        <th> Sample Type</th>
+                        <th> Nucleic Acid Type</th>
+                        <th> Concentration<br />(ng/μl)</th>
+                        <th> Total Volume (μl)</th>
+                        <th> Total Amount (ng)</th>
+                        <th> Extraction Date</th>
+                        <th> Extracted By</th>
+                        <th> QC Status</th>
+                    </tr>
+                </thead>
+                
+                <tbody id="tableBody">
+                    @for (int i = 0; i < ViewBag.totalCount; i++)
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <tr class="tableRow">
+                            <td>
+
+                                @Html.EditorFor(model => model[i].project_id, new { htmlAttributes = new { @class = "form-control", @type = "text", @Value = @samplesArray[i].project_id } })
+                                @Html.ValidationMessageFor(model => model[i].project_id, "", new { @class = "text-danger" })
+                            </td>
+
+                            <td>
+                                @Html.EditorFor(model => model[i].gcl_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].gcl_id } })
+                                @Html.ValidationMessageFor(model => model[i].gcl_id, "", new { @class = "text-danger" })
+                            </td>
+
+                            <td>
+                                @Html.EditorFor(model => model[i].sample_id, new { htmlAttributes = new { @class = "form-control", @Value = @samplesArray[i].sample_id } })
+                                @Html.ValidationMessageFor(model => model[i].sample_id, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model[i].sample_type, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="Cells", Value="Cells", Selected=true},
+                           new SelectListItem { Text="Solid Tissue", Value="Solid Tissue" },
+                           new SelectListItem { Text="Blood", Value="blood" },
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                                @Html.ValidationMessageFor(model => model[i].sample_type, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+
+                                @Html.DropDownListFor(model => model[i].nucleic_acid_type, new List<SelectListItem>
+                       {
+                           new SelectListItem { Text="DNA", Value="DNA", Selected=true},
+                           new SelectListItem { Text="RNA", Value="RNA" },
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                                @Html.ValidationMessageFor(model => model[i].nucleic_acid_type, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model[i].concentration, new { htmlAttributes = new { @class = "form-control input-validation-error ngConc", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model[i].concentration, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model[i].total_volume, new { htmlAttributes = new { id = "totalVolume", @class = "form-control input-validation-error totalVolume", @type = "text"} })
+                                @Html.ValidationMessageFor(model => model[i].total_volume, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model[i].total_amount, new { htmlAttributes = new { @class = "form-control input-validation-error totalAmount", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model[i].total_amount, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model[i].extraction_date, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy") } })
+                                @Html.ValidationMessageFor(model => model[i].extraction_date, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model[i].extracted_by, new { htmlAttributes = new { @class = "form-control input-validation-error", @type = "text", @Value=user} })
+                                @Html.ValidationMessageFor(model => model[i].extracted_by, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model[i].qc_status, new List<SelectListItem>
+                       {
+                          new SelectListItem { Text="Complete", Value="Complete", Selected=true},
+                           new SelectListItem { Text="Failed", Value="Failed" },
+                           new SelectListItem { Text="Reprocess", Value="Reprocess" }
+                       }, new { @class = "btn btn-default dropdown-toggle" })
+                                @Html.ValidationMessageFor(model => model[i].qc_status, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+            <br />
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input type="submit" value="Submit Data" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    }
+
+
+    else
+    {
+    <h2> Error: No samples were found for this project.</h2><br />
+
+            <input type="submit" value="Go To Work Queue" class="btn btn-primary" onclick="location.href='@Url.Action("Summary", "Data")'" />
+}
+
+
+
+<script>
+$(document).ready(function () {
+       $('.tableRow .totalVolume').keyup(multInputs);
+
+       function multInputs() {
+         
+           // for each row:
+           $("tr.tableRow").each(function () {
+               // get the values from this row:
+               var $ngConc = $('.ngConc', this).val();
+               var $vol = $('.totalVolume', this).val();
+               var $total = ($ngConc * 1) * ($vol * 1);
+               // set total for the row
+               $('.totalAmount',this).val($total.toFixed(2));
+               
+           });   
+       }
+  });
+
+</script>

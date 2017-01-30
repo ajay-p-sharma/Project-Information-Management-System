@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Report: Genomics Core Laboratory";
+}
+
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/DataTables/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.min.js"></script>
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+
+@*JQuery and CSS links for Datatables Export options*@
+<script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/DataTables/buttons.print.min.js"></script>
+<script src="~/Scripts/DataTables/buttons.html5.min.js"></script>
+<link href="~/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/buttons.flash.min.js"></script>
+
+@if (@ViewBag.Error != null)
+{
+    <div class="alert alert-info text-danger" id="submissionError" role="alert">
+        @ViewBag.Error
+    </div>
+}
+
+
+
+@if (ViewBag.Report != null)
+{
+    <h2 style="font-family:'Arial Rounded MT'; font:120; text-align:center;"> Report</h2><br />
+
+    <div>
+        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" style="width:100%;" id="reportTable">
+            <thead style="background-color:#2E86C1">
+               
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody style="background-color:#fef5e7; font-size:medium;">
+                <tr class="info">
+                    <td>Duration of Report</td>
+                    <td>@TempData["startDate"] to @TempData["endDate"]</td>
+
+                </tr>
+                <tr class="info">
+                    <td>Total New Projects Received</td>
+                    <td>@ViewBag.Report.numberOfProjects</td>
+                   
+                </tr>
+
+                <tr class="info">
+                    <td>Total New Extraction Projects Received</td>
+                    <td>@ViewBag.Report.numberOfExtractionProjects</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Total New Library Prep Received</td>
+                    <td>@ViewBag.Report.numberOfLibraryPrepProjects</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Total New Capture Projects Received</td>
+                    <td>@ViewBag.Report.numberOfCaptureProjects</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Total New Sequencing Projects Received</td>
+                    <td>@ViewBag.Report.numberOfSequencingProjects</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Projected Total Amount Recovery</td>
+                    <td>$ @ViewBag.Report.totalCost</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Total Amount Charged</td>
+                    <td>$ @ViewBag.Report.totalCostCharged</td>
+
+                </tr>
+
+                <tr class="info">
+                    <td>Total Charges Pending </td>
+                    <td>$ @ViewBag.Report.totalCostPending</td>
+
+                </tr>
+               
+                </tbody>
+            </table>
+
+    </div>
+        }
+
+<script type="text/javascript" charset="utf8">
+    $(document).ready( function () {
+        $('#reportTable').DataTable({
+            "paging": false,
+            "info": false,
+            "bFilter": false,
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf', 'print'
+            ]
+
+        });
+    });
+
+</script>

@@ -1,0 +1,133 @@
+﻿@model ProjectInformationManagementSystem.Models.incoming_project
+
+@{
+    ViewBag.Title = "TempProjectDetails";
+}
+
+<h2>TempProjectDetails</h2>
+
+<div class="details-wrapper">
+    <h4>Temporary Project Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.project_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.project_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lab_head)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lab_head)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sample_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sample_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.number_of_samples)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number_of_samples)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.samples_with_core)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.samples_with_core)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.species)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.species)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.service_requested)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.service_requested)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.downstream_process)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.downstream_process)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_submitted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_submitted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comments)
+        </dd>
+
+    </dl>
+    <div class="col-md-4 divButton">
+        @Html.ActionLink("Back to Queue", "TemporaryProjectQueue")
+    </div>
+</div>
+
+    
+    
+

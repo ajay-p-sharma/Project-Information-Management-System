@@ -1,0 +1,33 @@
+﻿@model ProjectInformationManagementSystem.Models.sample_detail
+
+@{
+    ViewBag.Title = "UploadFile";
+}
+
+<h2 style="text-align:center;">Upload File</h2>
+
+<div class="container jumbotron" style="max-width:65%; border-radius:10px;">
+    @if (ViewBag.Message != null || ViewBag.Error != null)
+    { <div class="alert alert-info">
+        @ViewBag.Message
+        @ViewBag.Error
+    </div>
+    }
+
+    @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table>
+            <tr>
+                
+                <td>
+                    <input class="btn btn-primary" type="file" name="UploadedFile" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="btn btn-primary" style="margin-top:20px;" type="submit" name="Submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>

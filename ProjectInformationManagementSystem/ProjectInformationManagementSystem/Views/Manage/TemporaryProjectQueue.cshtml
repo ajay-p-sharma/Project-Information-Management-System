@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjectInformationManagementSystem.Models.incoming_project>
+
+@{
+    ViewBag.Title = "TemporaryProjectQueue";
+}
+
+<h2 style="font-family:'Arial Rounded MT'; font:100; text-align:center">Incoming Projects Queue</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="projectQueueDiv">
+
+      <div class="col-md-1" style="color:white;">
+          <b><ins>Project #</ins></b> <br>
+          @Html.DisplayFor(modelItem => item.temp_project_id)
+      </div>
+
+      <div class="col-md-2" style="color:white;">
+          <b><ins>Users</ins></b> <br>
+          @Html.DisplayFor(modelItem => item.contact_name)<br>
+          @Html.DisplayFor(modelItem => item.lab_head)
+      </div>
+
+      <div class="col-md-2" style="color:white;">
+          <b><ins>Service</ins></b> <br>
+          @Html.DisplayFor(modelItem => item.service_requested)
+         
+      </div>
+
+      <div class="col-md-2" style="color:white;">
+          <b><ins>Species</ins></b> <br>
+          @Html.DisplayFor(modelItem => item.species)
+
+      </div>
+
+      <div class="col-md-2" style="color:white;">
+          <b><ins>Date</ins></b> <br>
+          @Html.DisplayFor(modelItem => item.date_submitted)
+
+      </div>
+
+      <div class="col-md-2" style="color:black;">
+          <b><ins>Options</ins></b> <br>
+          @Html.ActionLink("Upgrade", "PostIncomingToNewProject", new { id = item.temp_project_id }, new { @style = "color:black;" }) <br />
+          @Html.ActionLink("Details", "TempProjectDetails", new { id = item.temp_project_id }, new { @style = "color:black;" }) <br />
+          @Html.ActionLink("Delete", "Delete", new { id = item.temp_project_id }, new { @style = "color:black;" })
+
+      </div>
+        
+    </div>
+    }

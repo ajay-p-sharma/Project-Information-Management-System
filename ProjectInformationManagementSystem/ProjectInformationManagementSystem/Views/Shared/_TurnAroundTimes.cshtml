@@ -1,0 +1,23 @@
+﻿
+@{
+    var extractionTAT = @Session["averageExtractionTAT"];
+    var LibraryPrepTAT = @Session["LibraryPrepTAT"];
+    var captureTAT = @Session["captureTAT"];
+    var sequencingTAT = @Session["sequencingTAT"];
+}
+
+    
+        <div class="col col-md-3" style="text-align:center; font-size:large; font-family:'Open Sans'; border: 2px solid black; background-color:#2E86C1;  margin: 0 auto; border-radius:10px;">
+            @extractionTAT Days<br />Extraction TAT
+        </div>
+        <div class="col col-md-3" style="text-align:center; font-size:large; font-family:'Open Sans'; border: 2px solid black; background-color:#2E86C1; margin: 0 auto;border-radius:10px;">
+            @LibraryPrepTAT Days <br />Library Prep TAT
+        </div>
+        <div class="col col-md-3" style="text-align:center; font-size:large; font-family:'Open Sans'; border: 2px solid black; background-color:#2E86C1; margin: 0 auto;border-radius:10px;">
+            @captureTAT Days<br />Capture TAT
+        </div>
+        <div class="col col-md-3" style="text-align:center; font-size:large; font-family:'Open Sans'; border: 2px solid black; background-color:#2E86C1; margin: 0 auto; border-radius:10px;">
+            @sequencingTAT Days<br />Sequencing TAT
+        </div>
+    
+

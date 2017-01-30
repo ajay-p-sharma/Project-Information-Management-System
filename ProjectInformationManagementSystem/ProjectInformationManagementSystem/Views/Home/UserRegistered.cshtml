@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "UserRegistered";
+}
+
+<h2 style="font-family:'Arial Rounded MT'; font:100; text-align:center">User Registered</h2>
+
+@if (TempData["registerSuccessMessage"] != null)
+{
+    <div class="alert alert-info">
+        @TempData["registerSuccessMessage"]
+    </div>
+}
+@if (TempData["registerErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["registerErrorMessage"]
+    </div>
+}
+
